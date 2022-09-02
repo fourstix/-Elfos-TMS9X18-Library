@@ -3,13 +3,14 @@ This code provides a library for the Elf/OS TMS9X18 Video Driver API.  This libr
 
 Platform  
 --------
-This code written with this library should run on any platform with the Elf/OS TMS9X18 Video Driver loaded, such as the  [1802-Mini](https://github.com/dmadole/1802-Mini) with the [1802-Mini TMS9918 Video Card](https://github.com/dmadole/1802-Mini-9918-Video) created by David Madole or  a [Pico/Elf v2](http://www.elf-emulation.com/hardware.html) with a [TMS9118/9918 Color Board](http://www.elf-emulation.com/hardware.html). A lot of information and software for the 1802-Mini and the Pico/Elf v2 can be found in the [COSMAC ELF Group](https://groups.io/g/cosmacelf) at groups.io.
+This code written with this library should run on any platform with the Elf/OS TMS9X18 Video Driver loaded, such as the  [1802-Mini](https://github.com/dmadole/1802-Mini) with the [1802-Mini TMS9918 Video Card](https://github.com/dmadole/1802-Mini-9918-Video) created by David Madole or  a [Pico/Elf v2](http://www.elf-emulation.com/hardware.html) with the [TMS9118/9918 Color Board](http://www.elf-emulation.com/hardware.html) created by Mike Riley. A lot of information and software for the 1802-Mini and the Pico/Elf v2 can be found in the [COSMAC ELF Group](https://groups.io/g/cosmacelf) at groups.io.
 
 Examples
 ----------
-See the Elfos-9118-Demos repository for example code that uses this library.
+Please see the [Elfos-9118-Demos](https://github.com/fourstix/Elfos-TMS9118-Demos) repository on GitHub for example code that uses this library.
 
-
+TMS9X18 Video Library API
+--------------------------
 
 Repository Contents
 -------------------
