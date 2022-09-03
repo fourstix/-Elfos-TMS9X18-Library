@@ -82,9 +82,22 @@ TMS9X18 Text Mode Memory Map
 ----------------------------
 <table>
 <tr><th>Address</th><th colspan="2">Description</th><th>Notes</th></tr>
-<tr><td>0000h</td><td colspan="2">Pattern Table</td><td>Up to 256 8-byte font codes, 2048 bytes</td></tr>
+<tr><td>0000h</td><td colspan="2">Pattern Table</td><td>256 8-byte font codes, 2048 bytes</td></tr>
 <tr><td>0800h</td><td colspan="2">Names Table</td><td>40x24 characters, 960 bytes</td></tr>
 <tr><td>0BC0h</td><td rowspan="2" colspan="2">Unused</td><td rowspan="2">&nbsp;</td></tr>
+<tr><td>3FFFh</td></td></tr>
+</table>
+
+TMS9X18 Graphics II Mode Memory Map
+----------------------------
+<table>
+<tr><th>Address</th><th colspan="2">Description</th><th>Size</th></tr>
+<tr><td>0000h</td><td colspan="2">Pattern Table</td><td>6144 bytes</td></tr>
+<tr><td>1800h</td><td colspan="2">Sprite Pattern Table</td><td>512 bytes</td></tr>
+<tr><td>2000h</td><td colspan="2">Color Table</td><td>6144 bytes</td></tr>
+<tr><td>3800h</td><td colspan="2">Names Table</td><td>768 bytes</td></tr>
+<tr><td>3B00h</td><td colspan="2">Sprite Attributes Table</td><td>256 bytes</td></tr>
+<tr><td>3C00h</td><td rowspan="2" colspan="2">Unused</td><td rowspan="2">&nbsp;</td></tr>
 <tr><td>3FFFh</td></td></tr>
 </table>
 
