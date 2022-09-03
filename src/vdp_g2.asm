@@ -310,7 +310,7 @@ keep_on_eg2m:   ldi  V_RESET_GROUP
 ; Send color map data to vdp Color Table
 ; Inputs:
 ;   dw (inline) - ptr to color map data buffer
-;   dw (inline) - ptr to buffer with coloar map data size
+;   dw (inline) - ptr to buffer with color map data size
 ; -----------------------------------------------------------
                 proc sendCmapData
                 call setAddress
