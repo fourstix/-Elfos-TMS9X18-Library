@@ -1,5 +1,5 @@
 # Elfos-TMS9X18-Library
-This code provides a library for the Elf/OS TMS9X18 Video Driver API.  This library can be linked with code like the [Elfos-TMS9118-Demos]() to access the Elf/OS TMS9X18 Video Driver independent of the platform hardware such as the [1802-Mini TMS9x18 Video Card](https://github.com/dmadole/1802-Mini-9918-Video) by David Madole and for [Pico/Elf v2 TMS9118/9918 Color Video card](http://www.elf-emulation.com/hardware.html) by Mike Riley.  The source files for this library were assembled into object files using the [Asm/02 1802 Assembler](https://github.com/rileym65/Asm-02) by Mike Riley.
+This code provides a library for the [Elf/OS TMS9X18 Video Driver](https://github.com/fourstix/Elfos-TMS9X18-Driver) API.  This library can be linked with code like the [Elfos-TMS9118-Demos](https://github.com/fourstix/Elfos-TMS9118-Demos) to access TMS9X18 Video functions independent of the platform hardware such as the [1802-Mini TMS9x18 Video Card](https://github.com/dmadole/1802-Mini-9918-Video) by David Madole or the [Pico/Elf v2 TMS9118/9918 Color Video card](http://www.elf-emulation.com/hardware.html) by Mike Riley.  The source files for this library were assembled into object files using the [Asm/02 1802 Assembler](https://github.com/rileym65/Asm-02) by Mike Riley.
 
 Platform  
 --------
@@ -11,7 +11,15 @@ Please see the [Elfos-9118-Demos](https://github.com/fourstix/Elfos-TMS9118-Demo
 
 TMS9X18 Video Library API
 --------------------------
-
+**vdp_base**  -- Base functions for the TMS9X18 Video hardware.
+<table>
+<tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
+<tr><td>checkVideo</td><td colspan="2">Check to see if the video driver is loaded.</td><td colspan="2">(None)</td><td>Returns DF = 0 if loaded, DF = 1 if not loaded.</tr>
+<tr><td>setAddress</td><td colspan="2">Set the VDP address with the inlined value</td><td colspan="2">dw Address (inlined)</td>&nbsp;<td></tr>
+<tr><td>readStatus</td><td colspan="2">Read VDP status byte.</td><td colspan="2">(None)</td><td>Returns D = VDP Status byte.</tr>
+<tr><td>setGroup</td><td colspan="2">Set expansion group for video card.</td><td colspan="2">(None)</td><td>Always call this function before communication with the video card begins. It does nothing if group for the video card is defined as "none".</tr>
+<tr><td>resetGroup</td><td colspan="2">Reset expansion group back to the default value.</td><td colspan="2">(None)</td><td>Always call this function after communication with the video card ends. It does nothing if group for the video card is defined as "none".</tr>
+</table>
 Repository Contents
 -------------------
 * **/src/**  -- Source files for the TMS9X18 Video Library.
@@ -29,7 +37,7 @@ Repository Contents
   * charset.inc - Character set definitions for the library. The default is CP437 font, but the code can be re-assembled for the smaller TI99 font.
   * vdp.inc - API constants and useful VDP constants to be used by programs calling the driver.
 * **/obj/**  -- Object files for TMS9X18 video driver.
-  * build.bat - Windows batch file to create the vdp_video.lib library file from the object files. Use the command *build* to create from the object files.
+  * build.bat - Windows batch file to create the vdp_video.lib library file from the object files. Use the command *build* to concatenate the object files into the library file.
   * vdp_base.prg - Object file with base library functions to access the TMS9X18 Video Driver.
   * vdp_charset.prg - Object file with CP437 character set data used by the TMS9X18 Video Library.
   * vdp_init.prg - Object file with initialization functions used by the TMS9X18 Video Library.
