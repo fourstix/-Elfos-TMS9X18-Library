@@ -38,7 +38,7 @@ These API functions support Graphics II Mode for images and Text Mode for charac
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>beginTextMode</td><td colspan="2">Set up video card to write characters in Text mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</td></tr>
 <tr><td>endTextMode</td><td colspan="2">Reset the video card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
-<tr><td>setTextColor</td><td colspan="2">Set the text foreground and background color.</td><td colspan="2"> D = text color as byte (foreground color,background color)</td>Each color value is 4 bits, 0x0 to 0xF.</td></tr>
+<tr><td>setTextColor</td><td colspan="2">Set the text foreground and background color.</td><td colspan="2"> D = text color as byte (foreground color,background color)</td><td>Each color value is 4 bits, 0x0 to 0xF.</td></tr>
 <tr><td>setTextCharXY</td><td colspan="2">Position the text cursor to x,y for writing subsequent text.</td><td colspan="2" > db x, db y (inlined) x,y cursor co-ordinates</td><td>Sets the x,y position used by writeTextString.</td></tr>
 <tr><td>writeTextString</td><td colspan="2">Write a null-terminated text string at the cursor position.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Write text at the x,y cursor position set by setTextCharXY.</td></tr>
 </table>
