@@ -11,9 +11,9 @@ Please see the [Elfos-9118-Demos](https://github.com/fourstix/Elfos-TMS9118-Demo
 
 TMS9X18 Video Library API
 -------------------------
-These functions support Graphics II Mode and Text Mode.
+These API functions support Graphics II Mode for images and Text Mode for character output.
 
-**vdp_g2  -- Graphics II Mode functions for the TMS9X18 Video Library**
+**vdp_g2  -- Graphics II Mode API for the TMS9X18 Video Library**
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>beginG2Mode</td><td colspan="2">Set up video card to draw an image in Graphics II mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</td></tr>
@@ -28,18 +28,26 @@ These functions support Graphics II Mode and Text Mode.
 <tr><td>sendRleBmapData</td><td colspan="2">Send Sun RLE bitmap data to VDP Pattern Table.</td><td >dw ptr (inlined) to RLE compressed bitmap data buffer</td><td >dw ptr (inlined) into header buffer with compressed data size</td><td>Useful when reading bitmap data a from Sun Raster image file.</td></tr>
 <tr><td>sendCmapData</td><td colspan="2">Send file color map data to VDP Color Table.</td><td >dw ptr (inlined) to color map data buffer</td><td >dw ptr (inlined) into header buffer with data size</td><td>Useful when reading color map data from a Sun Raster image file.</td></tr>
 <tr><td>sendRleBmapData</td><td colspan="2">Send Sun RLE color map data to VDP Color Table.</td><td >dw ptr (inlined) to RLE compressed color map data buffer</td><td >dw ptr (inlined) into header buffer with compressed data size</td><td>Useful when reading color map data a from Sun Raster image file.</td></tr>
-</table>
 <tr><td>setG2CharXY</td><td colspan="2">Set Graphics 2 Mode x,y position from character co-ordinates (1..31,0..23)</td><td colspan="2" > db x, db y (inlined) x,y co-ordinates</td><td>Sets the x,y position used by drawG2String.</td></tr>
-<tr><td>setG2CharXY</td><td colspan="2">Draw a text string at the current x,y position in graphics II mode.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Draws text at the x,y position set by getG2CharXY.</td></tr>
+<tr><td>drawG2String</td><td colspan="2">Draw a text string at the current x,y position in graphics II mode.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Draws text at the x,y position set by getG2CharXY.</td></tr>
 </table>
 
-**vdp_g2  -- Graphics II Mode functions for the TMS9X18 Video Library**
+**vdp_text -- Text Mode API for the TMS9X18 Video Library**
+
+<table>
+<tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
+<tr><td>beginTextMode</td><td colspan="2">Set up video card to write characters in Text mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</td></tr>
+<tr><td>endTextMode</td><td colspan="2">Reset the vidoe card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
+<tr><td>setTextColor</td><td colspan="2">Set the text foreground and background color.</td><td colspan="2"> D = text color as byte (foreground color,background color)</td>Each color value is 4 bits, 0x0 to 0xF.<td></tr>
+<tr><td>setTextCharXY</td><td colspan="2">Position the text cursor to x,y for writing subsequent text.</td><td colspan="2" > db x, db y (inlined) x,y co-ordinates</td><td>Sets the x,y position used by writeTextString.</td></tr>
+<tr><td>writeTextString</td><td colspan="2">Write a null-terminated text string at the cursor position.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Write text at the x,y cursor position set by setTextCharXY.</td></tr>
+</table>
 
 Other TMS9X18 Video Library Functions
 -------------------------------------
 These library functions are mainly used internally by the API functions, but they are available for user programs.
 
-**vdp_base -- Base functions for the TMS9X18 Video Library**
+**vdp_base -- Base functions used by the TMS9X18 Video Library API**
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>checkVideo</td><td colspan="2">Check to see if the video driver is loaded.</td><td colspan="2">(None)</td><td>Returns DF = 0 if loaded, DF = 1 if not loaded.</tr>
@@ -49,7 +57,7 @@ These library functions are mainly used internally by the API functions, but the
 <tr><td>resetGroup</td><td colspan="2">Reset expansion group back to the default value.</td><td colspan="2">(None)</td><td>Always call this function after communication with the video card ends. It does nothing if group for the video card is defined as "none".</tr>
 </table>
 
-**vdp_charset -- Character Set font used by TMS9X18 Video Library functions**
+**vdp_charset -- Character Set font used by other functions in the TMS9X18 Video Library**
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th colspan="3">Notes</th></tr>
 <tr><td>VDP_CHARSET</td><td colspan="2">Font definitions for TMS9x18 character set.</td><td colspan="3">Default characters set font is CP437, but it can be assembled to use the smaller TI99 font by changing the font definition in charset.inc include file.  The character set size is defined in charset.inc as VDP_CHARSET_SIZE.</td></tr>
@@ -62,12 +70,12 @@ These library functions are mainly used internally by the API functions, but the
 <tr><td>MULT8</td><td colspan="2">Multiply to 8-bit values.</td><td colspan="2">R8.1 contains the 8-bit multiplier, R8.0 contains the 8-bit multiplicand.</td><td>Returns R7 with the 16-bit product of byte R8.0 x byte R8.1.</td></tr>
 </table>
 
-**vdp_init -- Initialization functions for the TMS9X18 Video**
+**vdp_init -- Initialization functions for the TMS9X18 Video Library API**
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>clearMem</td><td colspan="2">Clear the VDP VRAM memory.</td><td colspan="2">(None)</td><td>Clears all 16K bytes of VDP memory.</tr>
 <tr><td>initRegs</td><td colspan="2">Initialize the 8 VDP registers.</td><td colspan="2">dw ptr (inlined) to 8-byte vreg data buffer.</td>&nbsp;<td></tr>
-<tr><td>intCharset</td><td colspan="2">Initialize character set data in the text Pattern Table.</td><td colspan="2">(None)</td><td>Used in Text Mode.</tr>
+<tr><td>intCharset</td><td colspan="2">Initialize character set data in the text Pattern Table.</td><td colspan="2">(None)</td><td>Used in Text Mode to load the character set font data defined in vdp_charset.</tr>
 </table>
 
 Repository Contents
