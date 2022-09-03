@@ -17,7 +17,7 @@ These API functions support Graphics II Mode for images and Text Mode for charac
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>beginG2Mode</td><td colspan="2">Set up video card to draw an image in Graphics II mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</td></tr>
-<tr><td>endG2Mode</td><td colspan="2">Reset the vidoe card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
+<tr><td>endG2Mode</td><td colspan="2">Reset the video card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
 <tr><td>sendBitmap</td><td colspan="2">Send bitmap data to VDP Pattern Table.</td><td colspan="2">dw ptr  (inlined) to bitmap data buffer.</td><td>The bitmap data size should be 6144 bytes.</td></tr>
 <tr><td>sendColors</td><td colspan="2">Send  color map data to VDP Color Table.</td><td colspan="2">dw ptr  (inlined) to color map data buffer.</td><td>The color map data size should be 6144 bytes.</td></tr>
 <tr><td>setBackground</td><td colspan="2">Fill VDP Color table with single background color</td><td colspan="2">D = background color byte.</td>&nbsp;<td></tr>
@@ -28,7 +28,7 @@ These API functions support Graphics II Mode for images and Text Mode for charac
 <tr><td>sendRleBmapData</td><td colspan="2">Send Sun RLE bitmap data to VDP Pattern Table.</td><td >dw ptr (inlined) to RLE compressed bitmap data buffer</td><td >dw ptr (inlined) into header buffer with compressed data size</td><td>Useful when reading bitmap data a from Sun Raster image file.</td></tr>
 <tr><td>sendCmapData</td><td colspan="2">Send file color map data to VDP Color Table.</td><td >dw ptr (inlined) to color map data buffer</td><td >dw ptr (inlined) into header buffer with data size</td><td>Useful when reading color map data from a Sun Raster image file.</td></tr>
 <tr><td>sendRleBmapData</td><td colspan="2">Send Sun RLE color map data to VDP Color Table.</td><td >dw ptr (inlined) to RLE compressed color map data buffer</td><td >dw ptr (inlined) into header buffer with compressed data size</td><td>Useful when reading color map data a from Sun Raster image file.</td></tr>
-<tr><td>setG2CharXY</td><td colspan="2">Set Graphics 2 Mode x,y position from character co-ordinates (1..31,0..23)</td><td colspan="2" > db x, db y (inlined) x,y co-ordinates</td><td>Sets the x,y position used by drawG2String.</td></tr>
+<tr><td>setG2CharXY</td><td colspan="2">Set Graphics 2 Mode x,y position from character co-ordinates (1..31,0..23)</td><td colspan="2" > db x, db y (inlined) x,y character co-ordinates</td><td>Sets the x,y position used by drawG2String.</td></tr>
 <tr><td>drawG2String</td><td colspan="2">Draw a text string at the current x,y position in graphics II mode.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Draws text at the x,y position set by getG2CharXY.</td></tr>
 </table>
 
@@ -37,9 +37,9 @@ These API functions support Graphics II Mode for images and Text Mode for charac
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>beginTextMode</td><td colspan="2">Set up video card to write characters in Text mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</td></tr>
-<tr><td>endTextMode</td><td colspan="2">Reset the vidoe card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
-<tr><td>setTextColor</td><td colspan="2">Set the text foreground and background color.</td><td colspan="2"> D = text color as byte (foreground color,background color)</td>Each color value is 4 bits, 0x0 to 0xF.<td></tr>
-<tr><td>setTextCharXY</td><td colspan="2">Position the text cursor to x,y for writing subsequent text.</td><td colspan="2" > db x, db y (inlined) x,y co-ordinates</td><td>Sets the x,y position used by writeTextString.</td></tr>
+<tr><td>endTextMode</td><td colspan="2">Reset the video card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
+<tr><td>setTextColor</td><td colspan="2">Set the text foreground and background color.</td><td colspan="2"> D = text color as byte (foreground color,background color)</td>Each color value is 4 bits, 0x0 to 0xF.</td></tr>
+<tr><td>setTextCharXY</td><td colspan="2">Position the text cursor to x,y for writing subsequent text.</td><td colspan="2" > db x, db y (inlined) x,y cursor co-ordinates</td><td>Sets the x,y position used by writeTextString.</td></tr>
 <tr><td>writeTextString</td><td colspan="2">Write a null-terminated text string at the cursor position.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Write text at the x,y cursor position set by setTextCharXY.</td></tr>
 </table>
 
