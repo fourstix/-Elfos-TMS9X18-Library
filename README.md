@@ -9,9 +9,23 @@ Examples
 ----------
 Please see the [Elfos-9118-Demos](https://github.com/fourstix/Elfos-TMS9118-Demos) repository on GitHub for example code that uses this library.
 
-TMS9X18 Video Library API
---------------------------
-**vdp_base**  -- Base functions for the TMS9X18 Video hardware.
+TMS9X18 Video Library API (Main Functions)
+------------------------------------------
+**vdp_g2**  -- Graphics II Mode functions for the TMS9X18 Video Library.
+<table>
+<tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
+<tr><td>beginG2Mode</td><td colspan="2">Set up video card to draw an image in Graphics II mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</tr>
+<tr><td>endG2Mode</td><td colspan="2">Reset the vidoe card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</tr>
+<tr><td>sendBitmap</td><td colspan="2">Send bitmap data to VDP Pattern Table.</td><td colspan="2">dw ptr  (inlined) to bitmap data buffer.</td>The bitmap data size should be 6144 bytes.<td></tr>
+<tr><td>sendColors</td><td colspan="2">Send  color map data to VDP Color Table.</td><td colspan="2">dw ptr  (inlined) to color map data buffer.</td>The color map data size should be 6144 bytes.<td></tr>
+<tr><td>setBackground</td><td colspan="2">Fill VDP Color table with single background color</td><td colspan="2">D = background color byte.</td>&nbsp;<td></tr>
+<tr><td>sendNames</td><td colspan="2">Set name table entries for Graphics II mode.</td><td colspan="2">(None)</td><td>Fills Names Table with triplet series 0..255, 0..255, 0..255.</tr>
+</table>
+
+TMS9X18 Video Library API (Other Functions)
+------------------------------------------
+
+**vdp_base**  -- Base functions for the TMS9X18 Video Library.
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>checkVideo</td><td colspan="2">Check to see if the video driver is loaded.</td><td colspan="2">(None)</td><td>Returns DF = 0 if loaded, DF = 1 if not loaded.</tr>
@@ -20,6 +34,28 @@ TMS9X18 Video Library API
 <tr><td>setGroup</td><td colspan="2">Set expansion group for video card.</td><td colspan="2">(None)</td><td>Always call this function before communication with the video card begins. It does nothing if group for the video card is defined as "none".</tr>
 <tr><td>resetGroup</td><td colspan="2">Reset expansion group back to the default value.</td><td colspan="2">(None)</td><td>Always call this function after communication with the video card ends. It does nothing if group for the video card is defined as "none".</tr>
 </table>
+
+**vdp_charset**  -- Character Set font used by TMS9X18 Video Library functions.
+<table>
+<tr><th>API Name</th><th colspan="2">Description</th><th colspan="3">Notes</th></tr>
+<tr><td>VDP_CHARSET</td><td colspan="2">Font definitions for TMS9x18 character set.</td><td colspan="3">Default characters set font is CP437, but it can be assembled to use the smaller TI99 font by changing the font definition in charset.inc include file.  The character set size is defined in charset.inc as VDP_CHARSET_SIZE.</td></tr>
+</table>
+
+**vdp_math**  -- Math primitives used by other functions in the TMS9X18 Video Library.
+<table>
+<tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
+<tr><td>ADD16</td><td colspan="2">Add to 16 bit integers.</td><td>R7, 16 bit addend.</td></td><td>R8, 16 bit addend.</td><td>Returns R7 with the 16-bit sum of R7+R8, DF = 1 indicates overflow.</tr>
+<tr><td>MULT8</td><td colspan="2">Multiply to 8-bit values.</td><td colspan="2">R8.1 contains the 8-bit multiplier, R8.0 contains the 8-bit multiplicand.</td>Returns R7 with the 16-bit product of byte R8.0 x byte R8.1.<td></tr>
+</table>
+
+**vdp_init**  -- Initialization functions for the TMS9X18 Video hardware.
+<table>
+<tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
+<tr><td>clearMem</td><td colspan="2">Clear the VDP VRAM memory.</td><td colspan="2">(None)</td><td>Clears all 16K bytes of VDP memory.</tr>
+<tr><td>initRegs</td><td colspan="2">Initialize the 8 VDP registers.</td><td colspan="2">dw ptr (inlined) to 8-byte vreg data buffer.</td>&nbsp;<td></tr>
+<tr><td>intCharset</td><td colspan="2">Initialize character set data in the text Pattern Table.</td><td colspan="2">(None)</td><td>Used in Text Mode.</tr>
+</table>
+
 Repository Contents
 -------------------
 * **/src/**  -- Source files for the TMS9X18 Video Library.
