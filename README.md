@@ -78,6 +78,16 @@ These library functions are mainly used internally by the API functions, but the
 <tr><td>intCharset</td><td colspan="2">Initialize character set data in the text Pattern Table.</td><td colspan="2">(None)</td><td>Used in Text Mode to load the character set font data defined in vdp_charset.</tr>
 </table>
 
+TMS9X18 Text Mode Memory Map
+----------------------------
+<table>
+<tr><th>Address</th><th colspan="2">Description</th><th>Notes</th></tr>
+<tr><td>0000h</td><td colspan="2">Pattern Table</td><td>Up to 256 8-byte font codes, 2048 bytes</td></tr>
+<tr><td>0800h</td><td colspan="2">Names Table</td><td>40x24 characters, 960 bytes</td></tr>
+<tr><td>0BC0h</td><td rowspan="2" colspan="2">Unused</td><td rowspan="2">&nbsp;</td></tr>
+<tr><td>3FFFh</td></td></tr>
+</table>
+
 Repository Contents
 -------------------
 * **/src/**  -- Source files for the TMS9X18 Video Library.
