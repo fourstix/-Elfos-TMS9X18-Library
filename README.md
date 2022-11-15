@@ -30,10 +30,10 @@ as scratch registers, and some use R9 as well.
 <tr><td>sendCmapData</td><td colspan="2">Send file color map data to VDP Color Table.</td><td >dw ptr (inlined) to color map data buffer</td><td >dw ptr (inlined) to color map size field in header buffer</td><td>Useful when reading color map data from a Sun Raster image file.</td></tr>
 <tr><td>sendRleCmapData</td><td colspan="2">Send Sun RLE color map data to VDP Color Table.</td><td >dw ptr (inlined) to RLE compressed color map data buffer</td><td >dw ptr (inlined) to compressed color map size field in header buffer</td><td>Useful when reading color map data a from Sun Raster image file.</td></tr>
 <tr><td>setG2CharXY</td><td colspan="2">Set Graphics 2 Mode x,y position from character co-ordinates (1..31,0..23)</td><td>r9.0 = x byte</td><td>r9.1 = y byte</td><td>Sets the x,y position used by drawG2String and drawG2Char.</td></tr>
-<tr><td>getG2CharXY</td><td colspan="2">Get Graphics 2 Mode x,y position from character co-ordinates (1..31,0..23)</td><td colspan="2">-</td><td>Returns the x,y position in r9 with r9.0 = x byte, r9.1 = y byte</td></tr>
+<tr><td>getG2CharXY</td><td colspan="2">Get Graphics 2 Mode x,y position from character co-ordinates (1..31,0..23)</td><td colspan="2">(None)</td><td>Returns the x,y position in r9 with r9.0 = x byte, r9.1 = y byte</td></tr>
 <tr><td>updateG2Idx</td><td colspan="2">Update Graphics 2 position index with offset</td><td colspan="2">r9 = offset to add to current position index</td><td>If the new position exceeds the maximum buffer size, the index wraps around to the top.</td></tr>
-<tr><td>setG2BmapAddr</td><td colspan="2">Set Graphics 2 bitmap address from position index.</td><td colspan="2">-</td><td>r7 and r8 are used as scratch registers for calculating address</td></tr>
-<tr><td>setG2CmapAddr</td><td colspan="2">Set Graphics 2 color map address from position index.</td><td colspan="2">-</td><td>r7 and r8 are used as scratch registers for calculating address</td></tr>
+<tr><td>setG2BmapAddr</td><td colspan="2">Set Graphics 2 bitmap address from position index.</td><td colspan="2">(None)</td><td>r7 and r8 are used as scratch registers for calculating address</td></tr>
+<tr><td>setG2CmapAddr</td><td colspan="2">Set Graphics 2 color map address from position index.</td><td colspan="2">(None)</td><td>r7 and r8 are used as scratch registers for calculating address</td></tr>
 <tr><td>putG2Char</td><td colspan="2">Put a character at the current x,y position in graphics II mode.</td><td colspan="2">D contains the character to draw</td><td>Used by drawG2Char and drawG2ColorChar.</td></tr>
 <tr><td>putG2String</td><td colspan="2">Put a character at the current x,y position in graphics II mode.</td><td colspan="2">Rf points to a null terminated string</td><td>Used by drawG2String and drawG2ColorString. R9 contains the byte count.</td></tr>
 <tr><td>drawG2String</td><td colspan="2">Draw a text string at the current x,y position in graphics II mode.</td><td colspan="2" >RF - pointer to null terminated string</td><td>Draws text at the x,y position set by getG2CharXY.</td></tr>
@@ -41,12 +41,12 @@ as scratch registers, and some use R9 as well.
 <tr><td>drawG2Char</td><td colspan="2">Draw a character at the current x,y position in graphics II mode.</td><td colspan="2" >D contains the character to draw</td><td>Draws a character at the x,y position set by getG2CharXY.</td></tr>
 <tr><td>drawG2ColorChar</td><td colspan="2">Draw a character in color at the current x,y position in graphics II mode.</td><td colspan="2">D contains the character to draw</td><td>Draws character at the x,y position set by getG2CharXY using the color in the user info set by setColor.</td></tr>
 <tr><td>setColor</td><td colspan="2">Set color in user info.</td><td colspan="2">D contains the color byte to set as current color</td><td>Set the color byte in R8.0 and save as user info.</td></tr>
-<tr><td>resetColor</td><td colspan="2">Reset the current color to the default value from user info.</td><td colspan="2">-</td><td>Set the color byte in R8.0 with the default value in R8.1 from the user info.</td></tr>
-<tr><td>invertColor</td><td colspan="2">Swap the foreground and background values for the current color in user info.</td><td colspan="2">-</td><td>Swap the foreground and background values for the current color byte in R8.0 and save as user info.</td></tr>
-<tr><td>getInfo</td><td colspan="2">Get the data values from the user info.</td><td colspan="2">-</td><td>Set R7 and R8 to the values in the user info.</td></tr>
+<tr><td>resetColor</td><td colspan="2">Reset the current color to the default value from user info.</td><td colspan="2">(None)</td><td>Set the color byte in R8.0 with the default value in R8.1 from the user info.</td></tr>
+<tr><td>invertColor</td><td colspan="2">Swap the foreground and background values for the current color in user info.</td><td colspan="2">(None)</td><td>Swap the foreground and background values for the current color byte in R8.0 and save as user info.</td></tr>
+<tr><td>getInfo</td><td colspan="2">Get the data values from the user info.</td><td colspan="2">(None)</td><td>Set R7 and R8 to the values in the user info.</td></tr>
 <tr><td>setInfo</td><td colspan="2">Save data values in the user info.</td><td>R7 (position index)</td><td>R8 (R8.1 = default color byte and R8.0 = current color byte)</td><td>Save the values in R7 and R8 in the user info.</td></tr>
-<tr><td>blankG2Line</td><td colspan="2">Erase a line of characters in graphics II mode.</td><td colspan="2">-</td><td>Each line has 32 characters of 8 bytes each. This function does not change the position index.</td></tr>
-<tr><td>blankG2Screen</td><td colspan="2">Erase the entire character screen in graphics II mode and set the position to home.</td><td colspan="2">-</td><td>Each screen has 24 lines of 32 characters. This function sets the position index to zero (home).</td></tr>
+<tr><td>blankG2Line</td><td colspan="2">Erase a line of characters in graphics II mode.</td><td colspan="2">(None)</td><td>Each line has 32 characters of 8 bytes each. This function does not change the position index.</td></tr>
+<tr><td>blankG2Screen</td><td colspan="2">Erase the entire character screen in graphics II mode and set the position to home.</td><td colspan="2">(None)</td><td>Each screen has 24 lines of 32 characters. This function sets the position index to zero (home).</td></tr>
 </table>
 
 **vdp_text -- Text Mode API for the TMS9X18 Video Library**
@@ -117,6 +117,22 @@ TMS9X18 Graphics II Mode Memory Map
 <tr><td>3C00h</td><td rowspan="2" colspan="2">Unused</td><td rowspan="2">&nbsp;</td></tr>
 <tr><td>3FFFh</td></td></tr>
 </table>
+
+TMS9X18 Color Values 
+--------------------
+<table>
+<tr><th>Hex value</th><th colspan="2">Color</th><th>Hex value</th><th colspan="2">Color</th></tr>
+<tr><td>0</td><td colspan="2">Transparent</td><td>8</td><td colspan="2">Red</td></tr>
+<tr><td>1</td><td colspan="2">Black</td><td>9</td><td colspan="2">Light Red</td></tr>
+<tr><td>2</td><td colspan="2">Green</td><td>A</td><td colspan="2">Yellow</td></tr>
+<tr><td>3</td><td colspan="2">Light Green</td><td>B</td><td colspan="2">Light Yellow</td></tr>
+<tr><td>4</td><td colspan="2">Blue</td><td>C</td><td colspan="2">Dark Green</td></tr>
+<tr><td>5</td><td colspan="2">Light Blue</td><td>D</td><td colspan="2">Magenta</td></tr>
+<tr><td>6</td><td colspan="2">Dark Red</td><td>E</td><td colspan="2">Gray</td></tr>
+<tr><td>7</td><td colspan="2">Cyan</td><td>F</td><td colspan="2">White</td></tr>
+</table>
+Color byte is ffffbbbb where ffff is the 4-bit foreground hex value and bbbb is 
+the 4-bit background hex value.  For example f1h is white foreground on a black background. 
 
 Repository Contents
 -------------------
