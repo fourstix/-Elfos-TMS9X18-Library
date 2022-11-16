@@ -32,22 +32,28 @@
 ; Inputs: (none)
 ; Outputs: DF = 0 if loaded (okay), DF = 1 if not loaded (error) 
 ; -------------------------------------------------------------------
-            proc checkVideo     
+            proc checkVideo 
             LOAD r7, O_VIDEO    ; check if video driver is  loaded 
             lda  r7             ; get the vector long jump command
             smi  0C0h           ; if not long jump, assume never loaded
             lbnz chk_bad            
             lda  r7             ; get hi byte of address
             smi  05h            ; check to see if points to Kernel return
-            lbnz chk_good       ; if not, assume driver is already loaded
+            lbnz loaded         ; if not, assume driver is already loaded
             ldn  r7             ; get the lo byte of address
             smi  01bh           ; check to see if points to kernel return 
-            lbnz chk_good       ; if not, assume driver is already loaded                                  
+            lbz  chk_bad        ; if so, driver is not loaded
+
+loaded:     ldi  V_GET_VERSION  ; check version of driver 
+            call O_VIDEO
+            smi  13h            ; check for current version of driver
+            lbdf chk_good       ; equal to or greater than 1.3 is okay
+
 chk_bad:    ldi  0ffh           ; set DF flag to indicate not loaded
             lskp                ; skip to set DF flag                  
 chk_good:   ldi  00h            ; clear DF flag to indicate loaded
             shl                 ; shift msb into DF flag
-            rtn
+            rtn                
             endp
                 
 ; -------------------------------------------------------------------
