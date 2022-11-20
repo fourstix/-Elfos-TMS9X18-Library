@@ -19,6 +19,7 @@ as scratch registers, and some use R9 as well.
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
 <tr><td>beginG2Mode</td><td colspan="2">Set up video card to draw an image in Graphics II mode.</td><td colspan="2">(None)</td><td>Sets group, clears memory and initializes video card.</td></tr>
 <tr><td>endG2Mode</td><td colspan="2">Reset the video card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display, or D = V_VDP_RESET to reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
+<tr><td>updateG2Mode</td><td colspan="2">Update the video card to display an image in Graphics II mode.</td><td colspan="2">(None)</td><td>Writes to the VR0 register in the video card to cause an update.</td></tr>
 <tr><td>sendBitmap</td><td colspan="2">Send bitmap data to VDP Pattern Table.</td><td colspan="2">dw ptr  (inlined) to bitmap data buffer.</td><td>The bitmap data size should be 6144 bytes.</td></tr>
 <tr><td>sendColors</td><td colspan="2">Send  color map data to VDP Color Table.</td><td colspan="2">dw ptr  (inlined) to color map data buffer.</td><td>The color map data size should be 6144 bytes.</td></tr>
 <tr><td>setBackground</td><td colspan="2">Fill VDP Color table with single background color</td><td colspan="2">D = background color byte.</td>&nbsp;<td></tr>
@@ -45,6 +46,7 @@ as scratch registers, and some use R9 as well.
 <tr><td>invertColor</td><td colspan="2">Swap the foreground and background values for the current color in user info.</td><td colspan="2">(None)</td><td>Swap the foreground and background values for the current color byte in R8.0 and save as user info.</td></tr>
 <tr><td>getInfo</td><td colspan="2">Get the data values from the user info.</td><td colspan="2">(None)</td><td>Set R7 and R8 to the values in the user info.</td></tr>
 <tr><td>setInfo</td><td colspan="2">Save data values in the user info.</td><td>R7 (position index)</td><td>R8 (R8.1 = default color byte and R8.0 = current color byte)</td><td>Save the values in R7 and R8 in the user info.</td></tr>
+<tr><td>clearInfo</td><td colspan="2">Set the data values from the user info to zero.</td><td colspan="2">(None)</td><td>Clears the values in the user info.</td></tr>
 <tr><td>blankG2Line</td><td colspan="2">Erase a line of characters in graphics II mode.</td><td colspan="2">(None)</td><td>Each line has 32 characters of 8 bytes each. This function does not change the position index.</td></tr>
 <tr><td>blankG2Screen</td><td colspan="2">Erase the entire character screen in graphics II mode and set the position to home.</td><td colspan="2">(None)</td><td>Each screen has 24 lines of 32 characters. This function sets the position index to zero (home).</td></tr>
 </table>

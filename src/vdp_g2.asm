@@ -80,9 +80,8 @@
                 call initRegs
                 dw vregs_g2
                 rtn
-; -----------------------------------------------------------
-; Default VDP register settings for graphics II mode
-; -----------------------------------------------------------           
+                                 
+                ; Default VDP register settings for graphics II mode
 vregs_g2:       db  2       ; VR0 graphics 2 mode, no ext video
                 db  0C2h    ; VR1 16k vram, display enabled, intr dis; 16x16 sprites
                 db  0Eh     ; VR2 Name table address 3800h
@@ -91,10 +90,11 @@ vregs_g2:       db  2       ; VR0 graphics 2 mode, no ext video
                 db  76h     ; VR5 Sprite attribute table address 3B00h
                 db  3       ; VR6 Sprite pattern table address 1800h
                 db  01h     ; Backdrop color black
+
                 endp
             
 ; -------------------------------------------------------------------
-; init VDP register VR0 to update display in graphics mode 2
+; Update VDP register VR0 to update display in graphics mode 2
 ; -------------------------------------------------------------------
                 proc updateG2Mode
                 ldi  02h

@@ -187,9 +187,17 @@
 \clearMem 0007
 /initRegs 0009 00
 \initRegs 000a
-:0000 f8 01 d4 04 56 d4 00 00 d4 00 00 00 0e d5 02 c2
-:0010 0e ff 03 76 03 01
-+000b
+?vregs_g2 000b
+:0000 f8 01 d4 04 56 d4 00 00 d4 00 00 00 00 d5
+}
+{vregs_g2
+:0000 02 c2 0e ff 03 76 03 01
+}
+{resumeG2Mode
+/initRegs 0006 00
+\initRegs 0007
+?vregs_g2 0008
+:0000 f8 01 d4 04 56 d4 00 00 00 00 d5
 }
 {updateG2Mode
 :0000 f8 02 b7 f8 80 a7 f8 03 d4 04 56 d5
