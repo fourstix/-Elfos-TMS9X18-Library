@@ -17,8 +17,8 @@ as scratch registers, and some use R9 as well.
 **vdp_g2  -- Graphics II Mode API for the TMS9X18 Video Library**
 <table>
 <tr><th>API Name</th><th colspan="2">Description</th><th>Parameter 1</th><th>Parameter 2</th><th>Notes</th></tr>
-<tr><td>beginG2Mode</td><td colspan="2">Set up video card to draw an image in Graphics II mode.</td><td colspan="2">D = V_VDP_KEEP to keep display,<br>D = V_VDP_CLEAR to clear the display and reset the video card.</td><td>Sets group, clears memory and initializes video card.</td></tr>
-<tr><td>endG2Mode</td><td colspan="2">Reset the video card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display,<br>D = V_VDP_CLEAR to clear the display and reset the video card.</td><td>Resetting the video card turns off interrupts and clears the display.</td></tr>
+<tr><td>beginG2Mode</td><td colspan="2">Set up video card to draw an image in Graphics II mode.</td><td colspan="2">D = V_VDP_KEEP to keep display,<br>D = V_VDP_CLEAR to clear the display.</td><td>Clearing the display also clears the video card memory and initializes the registers.</td></tr>
+<tr><td>endG2Mode</td><td colspan="2">Reset the video card, if desired, and then reset the expansion group back to default.</td><td colspan="2">D = V_VDP_KEEP to keep display,<br>D = V_VDP_CLEAR to clear the display and reset the video card.</td><td>Clearing the display also turns off the video card interrupts.</td></tr>
 <tr><td>updateG2Mode</td><td colspan="2">Update the video card to display an image in Graphics II mode.</td><td colspan="2">(None)</td><td>Writes to the VR0 register in the video card to cause an update.</td></tr>
 <tr><td>sendBitmap</td><td colspan="2">Send bitmap data to VDP Pattern Table.</td><td colspan="2">dw ptr  (inlined) to bitmap data buffer.</td><td>The bitmap data size should be 6144 bytes.</td></tr>
 <tr><td>sendColors</td><td colspan="2">Send  color map data to VDP Color Table.</td><td colspan="2">dw ptr  (inlined) to color map data buffer.</td><td>The color map data size should be 6144 bytes.</td></tr>
