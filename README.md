@@ -72,8 +72,8 @@ These library functions are mainly used internally by the API functions, but the
 <tr><td>checkVideo</td><td colspan="2">Check to see if the video driver is loaded.</td><td colspan="2">(None)</td><td>Returns DF = 0 if loaded, DF = 1 if not loaded.</tr>
 <tr><td>setAddress</td><td colspan="2">Set the VDP address with the inlined value</td><td colspan="2">dw Address (inlined)</td>&nbsp;<td></tr>
 <tr><td>readStatus</td><td colspan="2">Read VDP status byte.</td><td colspan="2">(None)</td><td>Returns D = VDP Status byte.</tr>
-<tr><td>setGroup</td><td colspan="2">Set expansion group for video card.</td><td colspan="2">(None)</td><td>Always call this function before communication with the video card begins. It does nothing if group for the video card is defined as "none".</tr>
-<tr><td>resetGroup</td><td colspan="2">Reset expansion group back to the default value.</td><td colspan="2">(None)</td><td>Always call this function after communication with the video card ends. It does nothing if group for the video card is defined as "none".</tr>
+<tr><td>setGroup</td><td colspan="2">Set expansion group for video card.</td><td colspan="2">(None)</td><td>Always call this function before communication with the video card begins. It does nothing if the expansion group for the video card is defined as "none".</tr>
+<tr><td>resetGroup</td><td colspan="2">Reset expansion group back to the default value.</td><td colspan="2">(None)</td><td>Always call this function after communication with the video card ends. It does nothing if the expansion group for the video card is defined as "none".</tr>
 </table>
 
 **vdp_charset -- Character Set font used by other functions in the TMS9X18 Video Library**
