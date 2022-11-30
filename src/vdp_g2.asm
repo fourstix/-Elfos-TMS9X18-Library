@@ -71,15 +71,20 @@
 
 ; -------------------------------------------------------------------
 ; Set up video card to draw an image in Graphics II mode
-; Inputs: (none)
+; Inputs:  D  - V_VDP_CLEAR - Reset VDP to make sure interrupt is off
+;               V_VDP_KEEP  - Keep display on after exit
 ; -------------------------------------------------------------------
                 proc beginG2Mode 
-                ldi  V_SET_GROUP       ; Set up the Expansion Group for video card
+                stxd                  ; save D on stack
+                ldi  V_SET_GROUP      ; Set up the Expansion Group for video card
                 call O_VIDEO
+                irx                   ; get D from stack
+                ldx                   ; check D to clear
+                lbz  bg2m_done        ; if Keep display, we're done
                 call clearMem
                 call initRegs
                 dw vregs_g2
-                rtn
+bg2m_done:      rtn
                                  
                 ; Default VDP register settings for graphics II mode
 vregs_g2:       db  2       ; VR0 graphics 2 mode, no ext video
@@ -109,7 +114,8 @@ vregs_g2:       db  2       ; VR0 graphics 2 mode, no ext video
 
 ; -------------------------------------------------------------------            
 ; Set the expansion group to default
-; Inputs:  D  - reset VDP to make sure interrupt is off 
+; Inputs:  D  - V_VDP_CLEAR - Reset VDP to make sure interrupt is off
+;               V_VDP_KEEP  - Keep display on after exit
 ; -------------------------------------------------------------------            
                 proc endG2Mode
                 lbz  keep_on_eg2m   ; D indicates keep display on, or reset
